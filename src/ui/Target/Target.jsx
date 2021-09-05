@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TargetStyled, TargetWrapper, Total } from "./TargetStyled";
 import { useDispatch, useSelector } from "react-redux";
 import { clickTotal } from "../../store/actions/updatesActions";
+import { abbrNum } from "../../utils/functions";
 
 const Target = () => {
   const { cps, totalFriendly } = useSelector((state) => state.updates);
@@ -15,9 +16,9 @@ const Target = () => {
 
   return (
     <TargetWrapper>
-      <h1>Total CPS: {cps}</h1>
+      <h1>Total CPS: {abbrNum(cps)}</h1>
       <TargetStyled onClick={targetClicKHandler} randomColor={randomColor}>
-        <Total>{totalFriendly}</Total>
+        <Total>{totalFriendly} $</Total>
       </TargetStyled>
     </TargetWrapper>
   );

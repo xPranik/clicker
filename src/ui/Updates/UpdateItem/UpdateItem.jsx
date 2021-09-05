@@ -12,7 +12,7 @@ import {
 import money_icon from "./../../../static/icons/money.svg";
 import { abbrNum } from "../../../utils/functions";
 
-const UpdateItem = ({ update, buyHandler, total, type }) => {
+const UpdateItem = ({ update, buyHandler, total, type, cpsMultiplayer }) => {
   const onBuyHandler = () => {
     buyHandler(update.id);
   };
@@ -24,14 +24,13 @@ const UpdateItem = ({ update, buyHandler, total, type }) => {
       </UpdateItemHeader>
       {type === "shop" && (
         <UpdateItemBody>
-          Gives <span>{update.cps * update.cpsMultiplayer}</span> clicks per
-          second
+          Gives <span>{update.cps * cpsMultiplayer}</span> clicks per second
           <br />
           {update.lvl > 0 && `Total cps: ${update.cps * update.lvl}`}
         </UpdateItemBody>
       )}
       <UpdateItemFooter>
-        <UpdateItemPrice>Price: {abbrNum(update.price)}</UpdateItemPrice>
+        <UpdateItemPrice>Price: {abbrNum(update.price)}$</UpdateItemPrice>
         <UpdateButton
           disabled={total < update.price || update.sold}
           onClick={onBuyHandler}

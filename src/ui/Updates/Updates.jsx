@@ -5,7 +5,9 @@ import { buyProduct, buyUpgrade } from "../../store/actions/updatesActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Updates = ({ type }) => {
-  const { shop, upgrades, total } = useSelector((state) => state.updates);
+  const { shop, upgrades, total, cpsMultiplayer } = useSelector(
+    (state) => state.updates
+  );
   const dispatch = useDispatch();
 
   const buyHandler = (id) => {
@@ -26,6 +28,7 @@ const Updates = ({ type }) => {
           total={total}
           type={type}
           update={update}
+          cpsMultiplayer={cpsMultiplayer}
         />
       ))}
     </UpdatesWrapper>

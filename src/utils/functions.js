@@ -1,4 +1,4 @@
-export const abbrNum = (number, decPlaces = 2) => {
+export const abbrNum = (number, decPlaces = 1) => {
   decPlaces = Math.pow(10, decPlaces);
   const abbrev = ["k", "m", "b", "t"];
 
