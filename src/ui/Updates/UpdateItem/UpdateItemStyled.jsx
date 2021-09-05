@@ -7,20 +7,26 @@ export const UpdateButton = styled.button`
   font-size: 14px;
   cursor: pointer;
   background: #b9ee75;
-  box-shadow: 0 0 4px #88cb31;
   border-radius: 5px;
   color: black;
   border: none;
   text-transform: uppercase;
+  transition: all 0.2s;
   img {
     width: 12px;
     margin-right: 4px;
   }
   &:disabled {
-    background: ${(props) => (props.sold ? "#e6e6e6" : "#ee7575")};
-    box-shadow: 0 0 3px ${(props) => (props.sold ? "#e6e6e6" : "#cb3131")};
-    opacity: ${(props) => props.sold && 0.7};
+    background: #ee7575;
+    box-shadow: 0 0 3px #cb3131;
+    opacity: 0.7;
     cursor: default;
+  }
+  &:hover {
+    box-shadow: 0 0 4px #88cb31;
+    &:disabled {
+      box-shadow: 0 0 3px #cb3131;
+    }
   }
 `;
 
@@ -60,6 +66,7 @@ export const UpdateItemLvl = styled.div`
 export const UpdateItemPrice = styled.div`
   font-size: 12px;
   font-weight: 300;
+  color: #000;
   span {
     font-weight: 400;
   }

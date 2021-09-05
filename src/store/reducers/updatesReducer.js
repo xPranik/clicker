@@ -1,4 +1,5 @@
 import { updatesActionType } from "../../utils/consts";
+import { abbrNum } from "../../utils/functions";
 
 export const initState = {
   shop: {
@@ -14,40 +15,40 @@ export const initState = {
       id: "1060",
       name: "GeForce 1060",
       lvl: 0,
-      price: 10,
+      price: 50,
       priceMultiplier: 2,
-      cps: 2,
+      cps: 10,
     },
     1070: {
       id: "1070",
       name: "GeForce 1070",
       lvl: 0,
-      price: 20,
+      price: 200,
       priceMultiplier: 2.5,
-      cps: 3,
+      cps: 25,
     },
     1080: {
       id: "1080",
       name: "GeForce 1080",
       lvl: 0,
-      price: 100,
+      price: 500,
       priceMultiplier: 3,
-      cps: 4,
+      cps: 35,
     },
     2060: {
       id: "2060",
       name: "GeForce 2060",
       lvl: 0,
-      price: 200,
+      price: 1000,
       priceMultiplier: 3.5,
-      cps: 6,
+      cps: 50,
     },
   },
   upgrades: {
     doubleclick: {
       id: "doubleclick",
       name: "Double click",
-      price: 10,
+      price: 1000,
       clickMultiplayer: 2,
       cpsMultiplayer: 1,
       sold: false,
@@ -55,7 +56,39 @@ export const initState = {
     doublecps: {
       id: "doublecps",
       name: "Double CPS",
-      price: 10,
+      price: 5000,
+      clickMultiplayer: 1,
+      cpsMultiplayer: 2,
+      sold: false,
+    },
+    doubleclick_2: {
+      id: "doubleclick_2",
+      name: "Double click",
+      price: 10000,
+      clickMultiplayer: 2,
+      cpsMultiplayer: 1,
+      sold: false,
+    },
+    doublecps_2: {
+      id: "doublecps_2",
+      name: "Double CPS",
+      price: 50000,
+      clickMultiplayer: 1,
+      cpsMultiplayer: 2,
+      sold: false,
+    },
+    doubleclick_3: {
+      id: "doubleclick_3",
+      name: "Double click",
+      price: 50000,
+      clickMultiplayer: 2,
+      cpsMultiplayer: 1,
+      sold: false,
+    },
+    doublecps_3: {
+      id: "doublecps_3",
+      name: "Double CPS",
+      price: 100000,
       clickMultiplayer: 1,
       cpsMultiplayer: 2,
       sold: false,
@@ -64,10 +97,9 @@ export const initState = {
   clickMultiplayer: 1,
   cpsMultiplayer: 1,
   total: 0,
+  totalFriendly: 0,
   cps: 0,
 };
-
-console.log(initState);
 
 export const updatesReducer = (state = initState, action) => {
   switch (action.type) {
@@ -86,6 +118,7 @@ export const updatesReducer = (state = initState, action) => {
           },
         },
         total: state.total - state.shop[action.id].price,
+        totalFriendly: abbrNum(state.total - state.shop[action.id].price),
       };
     }
     case updatesActionType.BUY_UPGRADE: {
@@ -108,12 +141,14 @@ export const updatesReducer = (state = initState, action) => {
             ? state.upgrades[action.id].cpsMultiplayer
             : state.cpsMultiplayer + state.upgrades[action.id].cpsMultiplayer,
         total: state.total - state.upgrades[action.id].price,
+        totalFriendly: abbrNum(state.total - state.upgrades[action.id].price),
       };
     }
     case updatesActionType.CLICK_TOTAL: {
       return {
         ...state,
         total: state.total + state.clickMultiplayer,
+        totalFriendly: abbrNum(state.total + state.clickMultiplayer),
       };
     }
     case updatesActionType.UPDATE: {
@@ -123,6 +158,7 @@ export const updatesReducer = (state = initState, action) => {
       return {
         ...state,
         cps: res * state.cpsMultiplayer,
+        totalFriendly: abbrNum(state.cps + state.total),
         total: state.cps + state.total,
       };
     }

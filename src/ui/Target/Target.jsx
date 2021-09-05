@@ -3,8 +3,8 @@ import { TargetStyled, TargetWrapper, Total } from "./TargetStyled";
 import { useDispatch, useSelector } from "react-redux";
 import { clickTotal } from "../../store/actions/updatesActions";
 
-const Target = ({ total }) => {
-  const { cps } = useSelector((state) => state.updates);
+const Target = () => {
+  const { cps, totalFriendly } = useSelector((state) => state.updates);
   const [randomColor, setRandomColor] = useState("#000");
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Target = ({ total }) => {
     <TargetWrapper>
       <h1>Total CPS: {cps}</h1>
       <TargetStyled onClick={targetClicKHandler} randomColor={randomColor}>
-        <Total>{total}</Total>
+        <Total>{totalFriendly}</Total>
       </TargetStyled>
     </TargetWrapper>
   );
